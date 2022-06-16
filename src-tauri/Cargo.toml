@@ -9,7 +9,7 @@ edition = "2021"
 
 [build-dependencies]
 substrate-build-script-utils = { version = "3.0.0", git = "https://github.com/subspace/substrate", rev = "5f0aa1feb7250ac7b8c1b9928f87b2420b530e22" }
-tauri-build = { version = "1.0.0-rc.9", features = [] }
+tauri-build = { version = "1.0.0", features = [] }
 
 [dependencies]
 anyhow = "1.0.44"
@@ -63,8 +63,8 @@ features = [
 winreg = "0.10.1"
 
 [dependencies.tauri]
-features = ["api-all", "gtk-tray", "system-tray"]
-version = "1.0.0-rc.11"
+features = ["api-all", "system-tray"]
+version = "1.0.0"
 
 [features]
 default = [ "custom-protocol" ]

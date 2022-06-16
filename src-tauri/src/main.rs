@@ -62,6 +62,14 @@ async fn main() -> Result<()> {
             }
             Ok(())
         })
+        // tauri now supports default menu for OS's
+        // however, we don't want a menu for linux and mac
+        // also, the following from default menu does not work in our app (macos)
+        // - services
+        // - about Subspace Desktop
+        // - full screen related things
+        // if we change our minds, here is the code for using the default menu from tauri
+        // .menu(tauri::Menu::os_default(&ctx.package_info().name))
         .menu(menu::get_menu())
         .system_tray(menu::get_tray_menu())
         .on_system_tray_event(|app, event| {
@@ -77,7 +85,6 @@ async fn main() -> Result<()> {
                             window.hide().unwrap();
                             //#[cfg(target_os = "macos")]
                             // app.set_activation_policy(tauri::ActivationPolicy::Accessory); // TODO This should hide the main taskbar icon when the window is hidden, however there is a borrow error
-
                             item_handle.set_title("Show").unwrap();
                         } else {
                             window.show().unwrap();
