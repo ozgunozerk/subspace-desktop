@@ -35,10 +35,14 @@ async fn main() -> Result<()> {
             .add_directive("subspace_farmer=debug".parse().unwrap())
     };
 
+    let file_appender = tracing_appender::rolling::minutely("/some/directory", "prefix.log");
+    let (non_blocking, _guard) = tracing_appender::non_blocking(file_appender);
+
     // start logger, after we acquire the bundle identifier
     tracing_subscriber::registry()
         .with(
             fmt::layer()
+                .with_writer(non_blocking)
                 .with_ansi(!cfg!(windows))
                 .with_span_events(FmtSpan::CLOSE)
                 .with_filter(filter()),
