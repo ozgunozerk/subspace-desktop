@@ -116,7 +116,7 @@ jobs:
         if: runner.os == 'Linux'
 
       - name: Build (Ubuntu or Windows with OpenCL)
-        run: yarn build -- --features=opencl --target ${{ matrix.build.target }} -- -Z build-std
+        run: yarn build -c ./src-tauri/tauri.opencl.conf.json --target ${{ matrix.build.target }}
         if: (runner.os == 'Linux' || runner.os == 'Windows')
         env:
           TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
@@ -133,7 +133,7 @@ jobs:
         if: runner.os == 'Windows'
 
       - name: Build (without OpenCL)
-        run: yarn build -- --target ${{ matrix.build.target }} -- -Z build-std
+        run: yarn build --target ${{ matrix.build.target }}
         env:
           TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
           TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
