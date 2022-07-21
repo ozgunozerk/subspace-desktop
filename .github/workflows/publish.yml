@@ -70,13 +70,6 @@ jobs:
           components: rust-src
           override: true
 
-      - name: Rust toolchain (wasm32)
-        uses: actions-rs/toolchain@v1
-        # TODO: Below can be removed when https://github.com/actions-rs/toolchain/issues/126 is resolved
-        with:
-          toolchain: nightly-2022-07-09
-          target: wasm32-unknown-unknown
-
       - name: CUDA toolchain
         uses: Jimver/cuda-toolkit@v0.2.6
         if: runner.os == 'Linux' || runner.os == 'Windows'
