@@ -78,6 +78,11 @@ jobs:
         run: sudo apt -y --no-install-recommends install libdbus-1-dev pkg-config
         if: runner.os == 'Linux'
 
+      # for opencl build, it doesn't complain, but for without opencl build, name `cmake` could not be found in prost-build
+      - name: install protobuf (Linux)
+        run: sudo apt install protobuf-compiler
+        if: runner.os == 'Linux'
+
       # Workaround to resolve link error with C:\msys64\mingw64\bin\libclang.dll
       - name: Remove msys64
         run: Remove-Item -LiteralPath "C:\msys64\" -Force -Recurse
