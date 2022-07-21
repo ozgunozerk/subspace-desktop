@@ -28,7 +28,7 @@
       "shortDescription": "",
       "longDescription": "",
       "deb": {
-        "depends": []
+        "depends": ["ocl-icd-libopencl1"]
       },
       "macOS": {
         "frameworks": [],
