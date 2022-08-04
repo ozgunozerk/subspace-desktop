@@ -130,7 +130,7 @@ jobs:
       - name: Prepare installers for uploading (macOS intel)
         run: |
           mkdir executables
-          mv ${{ env.PRODUCTION_TARGET }}/dmg/subspace-desktop_x64.dmg executables/subspace-desktop_${{ matrix.build.suffix }}.dmg
+          mv ${{ env.PRODUCTION_TARGET }}/dmg/subspace-desktop*_x64.dmg executables/subspace-desktop_${{ matrix.build.suffix }}.dmg
           # Zip it so that signature is not lost
           ditto -c -k --rsrc executables/subspace-desktop_${{ matrix.build.suffix }}.dmg executables/subspace-desktop_${{ matrix.build.suffix }}.zip
           rm executables/subspace-desktop_${{ matrix.build.suffix }}.dmg
@@ -139,7 +139,7 @@ jobs:
       - name: Prepare installers for uploading (macOS arm)
         run: |
           mkdir executables
-          mv ${{ env.PRODUCTION_TARGET }}/dmg/subspace-desktop_aarch64.dmg executables/subspace-desktop_${{ matrix.build.suffix }}.dmg
+          mv ${{ env.PRODUCTION_TARGET }}/dmg/subspace-desktop*_aarch64.dmg executables/subspace-desktop_${{ matrix.build.suffix }}.dmg
           # Zip it so that signature is not lost
           ditto -c -k --rsrc executables/subspace-desktop_${{ matrix.build.suffix }}.dmg executables/subspace-desktop_${{ matrix.build.suffix }}.zip
           rm executables/subspace-desktop_${{ matrix.build.suffix }}.dmg
