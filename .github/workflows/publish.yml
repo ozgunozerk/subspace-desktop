@@ -46,6 +46,10 @@ jobs:
       - name: git checkout
         uses: actions/checkout@v2
 
+      - name: Extract version
+        id: extract_version
+        uses: Saionaro/extract-package-version@v1.0.6
+
       # For sloth256-189 Wasm support we need `llvm-ar`, which is not available by default
       - name: Install LLVM and Clang
         uses: KyleMayes/install-llvm-action@v1
