@@ -84,19 +84,6 @@ jobs:
           sudo apt-get install -y --no-install-recommends libwebkit2gtk-4.0-dev libayatana-appindicator3-dev
         if: runner.os == 'Linux'
 
-      # Imports PFX Certificate into keystore, allows Tauri to then sign the exe without being passed the private key.
-      - name: import windows certificate
-        if: runner.os == 'Windows'
-        env:
-          WINDOWS_PFX: ${{ secrets.CERTIFICATE_WINDOWS_PFX }}
-          WINDOWS_PFX_PASSWORD: ${{ secrets.CERTIFICATE_WINDOWS_PASSWORD }}
-        run: |
-          New-Item -ItemType directory -Path certificate
-          Set-Content -Path certificate/tempCert.txt -Value $env:WINDOWS_PFX
-          certutil -decode certificate/tempCert.txt certificate/certificate.pfx
-          Remove-Item –path certificate -include tempCert.txt
-          Import-PfxCertificate -FilePath certificate/certificate.pfx -CertStoreLocation Cert:\CurrentUser\My -Password (ConvertTo-SecureString -String $env:WINDOWS_PFX_PASSWORD -Force -AsPlainText)
-
       - name: install app dependencies
         # sometimes it fails downloading packages, so set a timeout https://github.com/yarnpkg/yarn/issues/4890
         run: yarn install --network-timeout 1000000
@@ -108,9 +95,6 @@ jobs:
       - name: Build (Ubuntu or Windows with OpenCL)
         run: yarn build -c ./src-tauri/tauri.opencl.conf.json -- --target ${{ matrix.build.target }}
         if: (runner.os == 'Linux' || runner.os == 'Windows')
-        env:
-          TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
-          TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
 
       - name: Rename OpenCL installer (Linux x86_64)
         run: |
