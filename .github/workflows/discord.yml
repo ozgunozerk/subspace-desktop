@@ -5,10 +5,14 @@ jobs:
   notify-discord:
     runs-on: ubuntu-latest
     steps:
+      - name: Extract version
+        id: extract_version
+        uses: Saionaro/extract-package-version@v1.0.6
+
       - name: Discord notification
         env:
           DISCORD_USERNAME: Subspace_Desktop-Releaser
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: "TESTING: The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed."
+          args: "Subspace desktop version: ${{ steps.extract_version.outputs.version }} has been deployed. Check it out in this link: https://github.com/subspace/subspace-desktop/releases/tag/${{ steps.extract_version.outputs.version }}"
