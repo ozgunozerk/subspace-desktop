@@ -16,6 +16,8 @@ jobs:
         env:
           DISCORD_USERNAME: Subspace_Desktop-Releaser
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_AVATAR: https://drive.google.com/drive/folders/1J0GtLE-6vTn7fpo9k3SrSy2TRL5isRH1
+
         uses: Ilshidur/action-discord@master
         with:
-          args: "Subspace desktop version: ${{ steps.extract_version.outputs.version }} has been released! Check it out in this link: https://github.com/subspace/subspace-desktop/releases/tag/${{ steps.extract_version.outputs.version }}"
+          args: "Subspace desktop version: ${{ steps.extract_version.outputs.version }} has been released! ⚡⚡ Check it out in this link: https://github.com/subspace/subspace-desktop/releases/tag/${{ steps.extract_version.outputs.version }}"
