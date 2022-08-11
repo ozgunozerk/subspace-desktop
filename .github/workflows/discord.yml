@@ -16,7 +16,7 @@ jobs:
         env:
           DISCORD_USERNAME: Subspace Desktop Releases
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_AVATAR: https://i.ibb.co/72RR7LB/JPG-200x200px-100.jpg
+          DISCORD_AVATAR: https://i.ibb.co/fv8tZy1/JPG-400x400px-100.jpg
 
         uses: Ilshidur/action-discord@master
         with:
